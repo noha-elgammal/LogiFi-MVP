@@ -2,6 +2,10 @@
 
 LogiFi is a proof‑of‑concept web application that demonstrates how modern tools can make supply‑chain risk analysis more transparent and actionable.  It was built for a hackathon and uses [Streamlit](https://streamlit.io) to create a bilingual (English/Arabic) interface.  The app walks a user through the “before → after” journey of a typical organisation: from manual risk tracking and delayed insight to instant risk estimation, scenario simulation and targeted recommendations.
 
+## Live demo
+
+For convenience, a hosted version of this prototype is available at [logifi‑mvp](https://logifi-mvp-ntcvdwcyaetsrb9jxjqjn5.streamlit.app/).  This deployment mirrors the features described below, allowing judges and other reviewers to explore the app without installing any software.  You can log in using the default credentials provided in the app and experiment with data upload, risk analysis, scenario simulations, the chat assistant and PDF reporting directly in your browser.
+
 ## Project structure
 
 The repository contains the following key files:
@@ -16,16 +20,11 @@ The repository contains the following key files:
 
 You may add a `.gitignore` file to exclude temporary files such as Python bytecode (`__pycache__/`), virtual environment folders (`venv/`) or local database snapshots.  Those files are not included here because they are created on‑the‑fly when you run the app.
 
-## Running the app locally
+## Installation and running locally
 
-This prototype is designed to run on your own machine.  There is **no requirement** to deploy it online for hackathon evaluation.  To run the application:
+The LogiFi application can be run on your local machine using Streamlit.  To get started:
 
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/your‑organisation/logifi.git
-   cd logifi
-   ```
+1. **Clone or download this repository.**
 
 2. **Create a virtual environment (optional but recommended):**
 
@@ -40,9 +39,9 @@ This prototype is designed to run on your own machine.  There is **no requiremen
    pip install -r requirements.txt
    ```
 
-   The requirements file lists Streamlit, Pandas, NetworkX, Plotly, FPDF, Matplotlib, scikit‑learn and other libraries used in this project.
+   The requirements file includes Streamlit, Pandas, NetworkX, Plotly, FPDF, Matplotlib, scikit‑learn, joblib and other libraries used in this project.
 
-4. **Run the application:**
+4. **Launch the application:**
 
    ```bash
    streamlit run new_site.py
@@ -50,7 +49,7 @@ This prototype is designed to run on your own machine.  There is **no requiremen
 
 5. **Open the app:**
 
-   After running the above command, Streamlit will print a local URL (e.g. `http://localhost:8501`) in the terminal.  Open that link in your browser to view the app.  All state is stored in your session, so data will be lost when you stop the server.
+   When you run the above command Streamlit will provide a local URL (typically `http://localhost:8501`).  Open this link in your web browser to interact with the app.  All state is stored in your session and will reset when the server stops.
 
 ## How it works
 
@@ -100,14 +99,12 @@ The assistant recognises patterns such as “top 3 risky suppliers”, “averag
 
 A “Generate Report” button on the Risk Analysis page produces a one‑page PDF summarising the analysis.  The report includes a timestamp, aggregate statistics and a bar chart.  It is generated with [FPDF](https://pyfpdf.github.io) and saved to the user’s computer via Streamlit’s `download_button`.
 
-## FAQ
+## Additional notes
 
-**Do I need to host the application?**  No.  The hackathon request is to upload your code to GitHub with a clear explanation.  Running the app locally via Streamlit is sufficient for evaluators.  If you wish to share a live demo, you could deploy to a service such as Streamlit Community Cloud or Heroku, but this is optional.
+**User data.**  The prototype uses an in‑memory SQLite database for login data and Streamlit’s session state for uploaded files.  There is no external database or cloud storage; all data vanish when the server stops.
 
-**Where does user data go?**  The prototype uses an in‑memory SQLite database for login data and Streamlit’s session state for uploaded files.  There is no external database or cloud storage.  All data vanish when you stop the server.
-
-**Can I extend the model?**  Yes.  `risk_model.pkl` can be replaced with your own model as long as it implements a `predict` method that accepts a list of six numeric features in the order described above.  If no model is found, the heuristic will be used.
+**Extending the model.**  You can replace `risk_model.pkl` with your own model, provided it exposes a `predict` method that accepts a list of six numeric features in the order described earlier.  When no model is found, the application falls back to the built‑in heuristic.
 
 ## License
 
-This project is shared for hackathon evaluation and learning.  Feel free to fork it and experiment, but please do not use it in production without permission.
+This project is provided for demonstration and evaluation purposes.  You are free to fork it and experiment, but please obtain permission before using it in production.
