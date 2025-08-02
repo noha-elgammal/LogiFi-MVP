@@ -12,7 +12,7 @@ The repository contains the following key files:
 
 | File | Purpose |
 | --- | --- |
-| `new_site.py` | The main Streamlit application.  It defines all user interface pages, handles user sessions, calculates or predicts risk scores, draws charts, generates PDF reports and serves a simple Q&A assistant. |
+| `app.py` | The main Streamlit application.  It defines all user interface pages, handles user sessions, calculates or predicts risk scores, draws charts, generates PDF reports and serves a simple Q&A assistant. |
 | `risk_model.pkl` | A pickled RandomForest model used to estimate risk scores.  If the model cannot be loaded or prediction fails, the app falls back to a heuristic calculation. |
 | `login_bg.png`, `logo.png` | Images used for the login page background and the LogiFi logo. |
 | `requirements.txt` | List of Python packages needed to run the app locally. |
@@ -44,7 +44,7 @@ The LogiFi application can be run on your local machine using Streamlit.  To get
 4. **Launch the application:**
 
    ```bash
-   streamlit run new_site.py
+   streamlit run app.py
    ```
 
 5. **Open the app:**
